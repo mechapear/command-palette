@@ -1,0 +1,12 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# In case after staged files are formatted and and they happens to match the remote
+# so, git will consider there is no change, lint-stage will error.
+# Normally, changes from lint-staged will be reverted to the state before commit.
+# It will make developer confuse like, I can see that I have changes, why did it error?
+# Using `--no-stash` will preserve all changes from lint-staged,
+# meaning that all changes from formatting will be preserve.
+# In this case the developer will see that there is no change left after commit (it's been formatted)
+# but lint-staged will error complaining about empty commit, which kinda give a hint to the dev.
+npx lint-staged --no-stash
