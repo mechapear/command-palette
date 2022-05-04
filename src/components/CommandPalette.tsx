@@ -18,6 +18,8 @@ export default function CommandPalette({ productList }: CommandPaletteProps) {
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === 'k' && (event.metaKey || event.ctrlKey)) {
         setIsOpen(!isOpen)
+      } else if (event.key === 'Escape') {
+        setIsOpen(false)
       }
     }
     window.addEventListener('keydown', onKeyDown)
@@ -47,7 +49,7 @@ export default function CommandPalette({ productList }: CommandPaletteProps) {
           enter="duration-300 ease-out"
           enterFrom="opacity-0"
           enterTo="opacity-100"
-          leave="duration-200 ease-in"
+          leave="duration-300 ease-in"
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
@@ -59,7 +61,7 @@ export default function CommandPalette({ productList }: CommandPaletteProps) {
           enter="duration-300 ease-out"
           enterFrom="opacity-0 scale-95"
           enterTo="opacity-100 scale-100"
-          leave="duration-200 ease-in"
+          leave="duration-300 ease-in"
           leaveFrom="opacity-100 scale-100"
           leaveTo="opacity-0 scale-95"
         >
