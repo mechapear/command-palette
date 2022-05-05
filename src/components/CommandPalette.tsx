@@ -11,7 +11,6 @@ export default function CommandPalette({ productList }: CommandPaletteProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [query, setQuery] = useState('')
   const [selectedProduct, setSelectedProduct] = useState(productList[0])
-
   // want to run the custom function when user press command+k or crt+k
   // press command+k or crt+k to open or close the command palette
   useEffect(() => {
@@ -54,7 +53,7 @@ export default function CommandPalette({ productList }: CommandPaletteProps) {
           leaveTo="opacity-0"
         >
           {/*add an overlay behind a Dialog to bring attention to the panel itself*/}
-          <Dialog.Overlay className="fixed inset-0 bg-gray-500/50" />
+          <Dialog.Overlay className="fixed inset-0 bg-stone-800/30" />
         </Transition.Child>
 
         <Transition.Child
@@ -69,21 +68,26 @@ export default function CommandPalette({ productList }: CommandPaletteProps) {
             // a type of dialogue box containing a combination of controls, such as sliders, text boxes, and drop-down lists
             // when user select one of the option inside the combobox
             // navigate user to selected product page
+            // happen when user clicks on one of the element or press enter
             value={selectedProduct}
-            onChange={setSelectedProduct}
+            onChange={(productItem) => {
+              setIsOpen(false)
+              setSelectedProduct(productItem)
+              console.log('navigate user to selected product page')
+            }}
             // trying to use className attribute on the element that does not exist in the dom
             // then using as="div" to fix it
             as="div"
-            className="relative mx-auto max-w-xl divide-y divide-gray-100 overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-black/5"
+            className="relative mx-auto max-w-xl divide-y divide-stone-100 overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-black/5"
           >
             {/*using items-center to vertical align*/}
             <div className="flex items-center space-x-2 p-2">
-              <SearchIcon className="h-6 w-6 text-gray-500" />
+              <SearchIcon className="h-6 w-6 text-stone-500" />
               <Combobox.Input
                 // handle search logic
                 // Combobox.Input will automatically open/close the Combobox.Options when searching.
                 onChange={(event) => setQuery(event.target.value)}
-                className="h-10 w-full border-0 bg-transparent text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-0"
+                className="h-10 w-full border-0 bg-transparent text-sm text-stone-800 placeholder-stone-400 focus:outline-none focus:ring-0"
                 placeholder="Search..."
               />
             </div>
@@ -97,15 +101,15 @@ export default function CommandPalette({ productList }: CommandPaletteProps) {
                   // Combobox.Options has no style by default
                   // style the active Combobox.Option
                   // active option is the one that currently focused vai the mouse or keyboard
-                  <Combobox.Option key={productItem.id} value={productList}>
+                  <Combobox.Option key={productItem.id} value={productItem}>
                     {({ active }) => (
-                      <div className={`px-4 py-2 ${active ? 'bg-indigo-500' : 'bg-white'}`}>
-                        <span className={`font-medium ${active ? 'text-white' : 'text-gray-900'}`}>
+                      <div className={`px-4 py-2 ${active ? 'bg-rose-500' : 'bg-white'}`}>
+                        <span className={`font-medium ${active ? 'text-white' : 'text-stone-900'}`}>
                           {productItem.title}
                         </span>
-                        <span
-                          className={`${active ? 'text-indigo-200' : 'text-gray-400'}`}
-                        >{`, ${productItem.category}`}</span>
+                        <span className={active ? 'text-rose-200' : 'text-stone-400'}>
+                          , {productItem.category}
+                        </span>
                       </div>
                     )}
                   </Combobox.Option>
