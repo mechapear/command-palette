@@ -73,6 +73,7 @@ export default function CommandPalette({ productList }: CommandPaletteProps) {
             onChange={(productItem) => {
               setIsOpen(false)
               setSelectedProduct(productItem)
+              setQuery('')
               console.log('navigate user to selected product page')
             }}
             // trying to use className attribute on the element that does not exist in the dom
