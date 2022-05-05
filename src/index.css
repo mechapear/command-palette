@@ -3,5 +3,6 @@
 @tailwind utilities;
 
 body {
-  @apply bg-gradient-to-r from-[#5EFCE8] to-[#736EFE] p-4;
+  background-color: #FAACA8;
+  background-image: linear-gradient(19deg, #FAACA8 0%, #DDD6F3 100%);
 }
