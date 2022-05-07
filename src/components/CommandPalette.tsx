@@ -1,6 +1,6 @@
 import { Combobox, Dialog, Transition } from '@headlessui/react'
-import { SearchIcon } from '@heroicons/react/outline'
 import React, { Fragment, useEffect, useState } from 'react'
+import ProductInput from '@/components/ProductInput'
 import ProductOptions from '@/components/ProductOptions'
 import { Product } from '@/mock-up-data'
 
@@ -82,19 +82,7 @@ export default function CommandPalette({ productList }: CommandPaletteProps) {
             as="div"
             className="relative mx-auto max-w-xl divide-y divide-stone-100 overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-black/5"
           >
-            {/*using items-center to vertical align*/}
-            <div className="flex items-center space-x-2 p-2">
-              <SearchIcon className="h-6 w-6 text-stone-500" />
-              <Combobox.Input
-                // handle search logic
-                // Combobox.Input will automatically open/close the Combobox.Options when searching.
-                onChange={(event) => setQuery(event.target.value)}
-                className="h-10 w-full border-0 bg-transparent text-sm text-stone-800 placeholder-stone-400 focus:outline-none focus:ring-0"
-                placeholder="Search..."
-              />
-            </div>
-            {/*there are some space with the padding of the Combobox.Options  showing all the time even if user does not type any letter*/}
-            {/*remove the space by wrapping the Combobox.Options into a conditional check*/}
+            <ProductInput onChange={(event) => setQuery(event.target.value)} />
             <ProductOptions productList={filteredProductList} />
           </Combobox>
         </Transition.Child>

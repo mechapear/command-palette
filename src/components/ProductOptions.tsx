@@ -7,7 +7,9 @@ export type ProductOptionsProps = {
 }
 
 export default function ProductOptions({ productList }: ProductOptionsProps) {
-  //ถ้าไม่ให้ render ให้ return null
+  // there are some space with the padding of the Combobox.Options showing all the time even if user does not type any letter
+  // remove the space by wrapping the Combobox.Options into a conditional check
+  // ถ้าไม่ให้ render ให้ return null
   if (productList.length <= 0) return null
 
   return (
