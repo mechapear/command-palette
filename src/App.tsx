@@ -1,6 +1,5 @@
 import React from 'react'
-import CommandPalette from '@/components/CommandPalette'
-import { productList } from '@/mock-up-data'
+import CommandPaletteDialog from '@/components/CommandPaletteDialog'
 
 const App = (): JSX.Element => {
   return (
@@ -10,7 +9,7 @@ const App = (): JSX.Element => {
           Press <Kbd>⌘ + K</Kbd> or <Kbd>Ctrl + K</Kbd> to open the command palette
         </p>
       </div>
-      <CommandPalette productList={productList} />
+      <CommandPaletteDialog />
     </>
   )
 }
