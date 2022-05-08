@@ -1,9 +1,21 @@
 import { Dialog, Transition } from '@headlessui/react'
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useCallback, useEffect, useMemo, useState } from 'react'
 import CommandPalette from '@/components/CommandPalette'
+import { CommandPaletteOptionItem } from '@/components/CommandPaletteOptions'
+import { mockProductList, Product } from '@/mock-up-data'
 
 export default function CommandPaletteDialog() {
   const [isOpen, setIsOpen] = useState(false)
+
+  // Pass a “create” function and an array of dependencies.
+  // useMemo will only recompute the memoized value when one of the dependencies has changed.
+  // This optimization helps to avoid expensive calculations on every render.
+  // An array of dependencies = [] because the data is imported from the file that we know it won't change.
+  const commandPaletteOptionList = useMemo(() => convertDataFormat(mockProductList), [])
+
+  // useCallback(fn, deps) is equivalent to useMemo(() => fn, deps)
+  const closeDialog = useCallback(() => setIsOpen(false), [])
+
   // want to run the custom function when user press command+k or crt+k
   // press command+k or crt+k to open or close the command palette
   useEffect(() => {
@@ -44,8 +56,18 @@ export default function CommandPaletteDialog() {
           <Dialog.Overlay className="fixed inset-0 bg-stone-800/30" />
         </Transition.Child>
 
-        <CommandPalette onSelectCommand={() => setIsOpen(false)} />
+        <CommandPalette onSelectCommand={closeDialog} optionList={commandPaletteOptionList} />
       </Dialog>
     </Transition.Root>
   )
+}
+
+function convertDataFormat(productList: Product[]): CommandPaletteOptionItem[] {
+  return productList.map((product) => {
+    return {
+      id: product.id,
+      title: product.title,
+      meta: product.category,
+    }
+  })
 }

@@ -6,7 +6,7 @@ export type Product = {
   category: ProductCategory
 }
 
-export const productList: Product[] = [
+export const mockProductList: Product[] = [
   { id: 1, title: 'Applied Mathematics', subject: 'Math', category: 'TCAS' },
   { id: 2, title: 'Applied Physics', subject: 'Physics', category: 'TCAS' },
   { id: 3, title: 'Applied Chemistry', subject: 'Chemistry', category: 'TCAS' },

@@ -1,24 +1,26 @@
 import { Combobox, Transition } from '@headlessui/react'
 import React, { useState } from 'react'
 import CommandPaletteInput from '@/components/CommandPaletteInput'
-import ProductOptions from '@/components/ProductOptions'
-import { Product, productList } from '@/mock-up-data'
+import CommandPaletteOptions, { CommandPaletteOptionItem } from '@/components/CommandPaletteOptions'
 
 export type CommandPaletteProps = {
   // ? is an optional property
   /**
    * it is called whenever the command is selected
    */
-  onSelectCommand?: (product: Product) => void
+  onSelectCommand?: (option: CommandPaletteOptionItem) => void
+  optionList: CommandPaletteOptionItem[]
 }
 
-const CommandPalette = ({ onSelectCommand }: CommandPaletteProps) => {
+const CommandPalette = ({ onSelectCommand, optionList }: CommandPaletteProps) => {
   const [query, setQuery] = useState('')
-  const [selectedProduct, setSelectedProduct] = useState(productList[0])
+  const [selectedOption, setSelectedOption] = useState(optionList[0])
 
-  // using query state to filter product list by the title
-  const filteredProductList = query
-    ? productList.filter((product) => product.title.toLowerCase().includes(query.toLowerCase()))
+  // using query state to filter option list by the title
+  const filteredOptionList = query
+    ? optionList.filter((optionItem) =>
+        optionItem.title.toLowerCase().includes(query.toLowerCase())
+      )
     : []
 
   return (
@@ -33,18 +35,18 @@ const CommandPalette = ({ onSelectCommand }: CommandPaletteProps) => {
       <Combobox
         // a type of dialogue box containing a combination of controls, such as sliders, text boxes, and drop-down lists
         // when user select one of the option inside the combobox
-        // navigate user to selected product page
+        // navigate user to selected option page
         // happen when user clicks on one of the element or press enter
-        value={selectedProduct}
-        onChange={(productItem) => {
-          setSelectedProduct(productItem)
+        value={selectedOption}
+        onChange={(optionItem) => {
+          setSelectedOption(optionItem)
           setQuery('')
           // onSelectCommand() is an optional event handler prop or optional callbacks (ไม่มีอันนี้ code หน้านี้ก็ทำงานได้ปกติ)
-          // callback function จะทำงานเมื่อมี event เกิดขึ้น กรณีนี้จะทำงานเมื่อ user เลือก product
+          // callback function จะทำงานเมื่อมี event เกิดขึ้น กรณีนี้จะทำงานเมื่อ user เลือก option
           // ?.() is an optional function call
           // to prevent error from calling undefined value
-          onSelectCommand?.(productItem)
-          console.log('navigate user to selected product page')
+          onSelectCommand?.(optionItem)
+          console.log('navigate user to selected option page')
         }}
         // trying to use className attribute on the element that does not exist in the dom
         // then using as="div" to fix it
@@ -52,7 +54,7 @@ const CommandPalette = ({ onSelectCommand }: CommandPaletteProps) => {
         className="relative mx-auto max-w-xl divide-y divide-stone-100 overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-black/5"
       >
         <CommandPaletteInput onChange={setQuery} />
-        <ProductOptions productList={filteredProductList} />
+        <CommandPaletteOptions optionList={filteredOptionList} />
       </Combobox>
     </Transition.Child>
   )
