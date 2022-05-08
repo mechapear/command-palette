@@ -2,11 +2,11 @@ import { Combobox } from '@headlessui/react'
 import { SearchIcon } from '@heroicons/react/outline'
 import React from 'react'
 
-export type ProductInputProps = {
+export type CommandPaletteInputProps = {
   onChange: (value: string) => void
 }
 
-const ProductInput = ({ onChange }: ProductInputProps) => {
+const CommandPaletteInput = ({ onChange }: CommandPaletteInputProps) => {
   return (
     // using items-center to vertical align
     <div className="flex items-center space-x-2 p-2">
@@ -25,4 +25,4 @@ const ProductInput = ({ onChange }: ProductInputProps) => {
   )
 }
 
-export default ProductInput
+export default CommandPaletteInput

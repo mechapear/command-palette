@@ -1,6 +1,6 @@
 import { Combobox, Dialog, Transition } from '@headlessui/react'
 import React, { Fragment, useEffect, useState } from 'react'
-import ProductInput from '@/components/ProductInput'
+import CommandPaletteInput from '@/components/CommandPaletteInput'
 import ProductOptions from '@/components/ProductOptions'
 import { Product } from '@/mock-up-data'
 
@@ -82,7 +82,7 @@ export default function CommandPalette({ productList }: CommandPaletteProps) {
             as="div"
             className="relative mx-auto max-w-xl divide-y divide-stone-100 overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-black/5"
           >
-            <ProductInput onChange={setQuery} />
+            <CommandPaletteInput onChange={setQuery} />
             <ProductOptions productList={filteredProductList} />
           </Combobox>
         </Transition.Child>
