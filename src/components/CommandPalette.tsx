@@ -82,7 +82,7 @@ export default function CommandPalette({ productList }: CommandPaletteProps) {
             as="div"
             className="relative mx-auto max-w-xl divide-y divide-stone-100 overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-black/5"
           >
-            <ProductInput onChange={(event) => setQuery(event.target.value)} />
+            <ProductInput onChange={setQuery} />
             <ProductOptions productList={filteredProductList} />
           </Combobox>
         </Transition.Child>
