@@ -1,9 +1,11 @@
 {
-  "name": "command-pallete",
+  "name": "command-palette",
   "version": "0.0.1",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build-gh": "yarn build --base=/command-palette/",
+    "deploy-gh": "yarn build-gh && gh-pages -d dist",
     "serve": "vite preview --port 8080",
     "type-check": "tsc -p tsconfig.json",
     "lint": "eslint ./src",
@@ -39,6 +41,7 @@
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.5.0",
     "eslint-plugin-unused-imports": "^1.1.5",
+    "gh-pages": "^6.0.0",
     "husky": "^7.0.4",
     "lint-staged": "^11.2.6",
     "postcss": "^8.4.13",
